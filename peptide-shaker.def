@@ -4,22 +4,49 @@ From: opensuse/tumbleweed
 %files 
 # copy unziped files. Alternatively, it can be downloaded from the internet and extracted.
 ../repos/PeptideShaker-2.2.9/ /opt/
+../repos/SearchGUI-4.1.16/ /opt/
 
 %post
 
 zypper in -y java-11-openjdk
 export JAVA_HOME=/usr/lib64/jvm/java-11-openjdk/
+touch /opt/PeptideShaker-2.2.9/resources/conf/startup.log
 chmod 777 /opt/PeptideShaker-2.2.9/resources/conf/startup.log
+touch /opt/PeptideShaker-2.2.9/resources/PeptideShaker.log
 chmod 777 /opt/PeptideShaker-2.2.9/resources/PeptideShaker.log 
+touch /opt/SearchGUI-4.1.16/resources/conf/startup.log
+chmod 777 /opt/SearchGUI-4.1.16/resources/conf/startup.log
+touch /opt/SearchGUI-4.1.16/resources/SearchGUI.log
+chmod 777 /opt/SearchGUI-4.1.16/resources/SearchGUI.log
 # wget https://genesis.ugent.be/maven2/eu/isas/peptideshaker/PeptideShaker/2.2.9/PeptideShaker-2.2.9.zip -O /opt/peptide-shaker.zip
 
 
 # %environment
 
-# %runscript
-# java -jar /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar
-# java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.PeptideShakerCLI
 
+%apprun PeptideShaker 
+    java -jar /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar $@
+
+%apprun PeptideShakerCLI 
+    java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.PeptideShakerCLI $@
+
+%apprun ReportCLI 
+    java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.ReportCLI $@
+
+%apprun FollowUpCLI 
+    java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.FollowUpCLI $@
+
+%apprun MzidCLI 
+    java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.MzidCLI $@
+
+%apprun StirredCLI 
+    java -cp /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar eu.isas.peptideshaker.cmd.StirredCLI $@
+
+%apprun SearchGUI 
+    java jar /opt/SearchGUI-4.1.16/SearchGUI-4.1.16.jar $@
+
+%apprun SearchCLI 
+    java -cp /opt/SearchGUI-4.1.16/SearchGUI-4.1.16.jar eu.isas.searchgui.cmd.SearchCLI $@
 
 %labels
 Author jose.pereira@lnbio.cnpem.br
