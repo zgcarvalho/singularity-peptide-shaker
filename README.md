@@ -1,4 +1,6 @@
+# singularity-peptide-shaker
 
+A [singularity container](https://github.com/sylabs/singularity) build definition file to run [PeptideShaker](http://compomics.github.io/projects/peptide-shaker). 
 
 Build:
 
