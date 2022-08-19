@@ -18,11 +18,12 @@ touch /opt/SearchGUI-4.1.16/resources/conf/startup.log
 chmod 777 /opt/SearchGUI-4.1.16/resources/conf/startup.log
 touch /opt/SearchGUI-4.1.16/resources/SearchGUI.log
 chmod 777 /opt/SearchGUI-4.1.16/resources/SearchGUI.log
+chmod 777 /opt/SearchGUI-4.1.16/resources/conf/searchGUI_configuration.txt
 # wget https://genesis.ugent.be/maven2/eu/isas/peptideshaker/PeptideShaker/2.2.9/PeptideShaker-2.2.9.zip -O /opt/peptide-shaker.zip
 
 
-# %environment
-
+# %runscript
+# java -jar /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar
 
 %apprun PeptideShaker 
     java -jar /opt/PeptideShaker-2.2.9/PeptideShaker-2.2.9.jar $@
@@ -50,5 +51,5 @@ chmod 777 /opt/SearchGUI-4.1.16/resources/SearchGUI.log
 
 %labels
 Author jose.pereira@lnbio.cnpem.br
-Version v0.0.1
+Version v0.1
 Info OpenSuSE Tumbleweed with PeptideShaker preinstalled.
